@@ -1,31 +1,32 @@
 public class Solution {
     public String longestPalindrome(String str) {
-        int len = str.length();
-        char[] s = str.toCharArray();
-        int longestBegin = 0;
-        int maxLen = 1;
-        boolean [][] table = new boolean[len][len];
-        for (int i = 0; i < len; i++) {
-            table[i][i] = true;
-        }
-        for (int i = 0; i < len - 1; i++) {
-            if (s[i] == s[i+1]) {
-                table[i][i+1] = true;
-                longestBegin = i;
-                maxLen = 2;
+        int length = str.length();
+        char[] arr = str.toCharArray();
+        boolean[][] dp = new boolean[length][length];
+        int start = 0;
+        int max = 1;
+        
+        for(int i = 0; i < length; i++)
+            dp[i][i] = true;
+            
+        for(int i = 0; i < length - 1; i++){
+            if(arr[i] == arr[i + 1]){
+                max = 2;
+                dp[i][i + 1] = true;
+                start = i;
             }
         }
-        
-        for (int tempLen = 3; tempLen <= len; tempLen++) {
-            for (int i = 0; i < len-tempLen+1; i++) {
-                int j = i+tempLen-1;
-                if (s[i] == s[j] && table[i+1][j-1]) {
-                    table[i][j] = true;
-                    longestBegin = i;
-                    maxLen = tempLen;
+            
+        for(int len = 3; len < str.length() + 1; len++) {
+            for(int i = 0; i < str.length() - len + 1; i++) {
+                dp[i][i + len - 1] = dp[i + 1][i + len - 2] && (arr[i] == arr[i + len - 1]);
+                if(dp[i][i + len - 1] && len > max) {
+                    start = i;
+                    max = len;
                 }
             }
         }
-        return str.substring(longestBegin, maxLen + longestBegin);
+        
+        return str.substring(start, start + max);
     }
 }

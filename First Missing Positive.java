@@ -7,16 +7,14 @@ public class Solution {
         int len = nums.length;
         int pos = 0;
         
-        while(pos < len)
-        {
+        while(pos < len) {
             if(nums[pos] > 0 && nums[pos] <= len && nums[nums[pos] - 1] != nums[pos])
                 swap(nums, pos, nums[pos] - 1); // this makes the nums[pos] "consistent" with its pos
             else
                 pos++;
         }
         
-        for(int i = 0; i < len; i++)
-        {
+        for(int i = 0; i < len; i++) {
             if(nums[i] != i + 1)
                 return i + 1;
         }
@@ -25,8 +23,7 @@ public class Solution {
         return len + 1;
     }
     
-    public void swap(int[] nums, int a, int b)
-    {
+    public void swap(int[] nums, int a, int b) {
         int temp = nums[a];
         nums[a] = nums[b];
         nums[b] = temp;

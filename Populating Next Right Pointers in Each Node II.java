@@ -11,56 +11,36 @@ public class Solution {
         if(root == null)
             return;
         TreeLinkNode lastHead = root;
-        TreeLinkNode lastCur = null;
+        TreeLinkNode lastCur = root;
         TreeLinkNode head = null;
         TreeLinkNode cur = null;
-        
-        while(lastHead != null)
-        {
-            // this while handles all levels
+        while(lastHead != null) {
+            // this will handle all levels of tree
             lastCur = lastHead;
-            
-            while(lastCur != null)
-            {
-                // this while will handle with one level
-                if(lastCur.left != null)
-                {
-                    if(head == null)
-                    {
-                        head = lastCur.left;
-                        cur = head;
-                    }
-                    else
-                    {
-                        cur.next = lastCur.left;
-                        cur = cur.next;
-                    }
-                }
-                
-                // this is for the right branch
-                if(lastCur.right != null)
-                {
-                    if(head == null)
-                    {
-                        head = lastCur.right;
-                        cur = head;
-                    }
-                    else
-                    {
-                        cur.next = lastCur.right;
-                        cur = lastCur.right;
-                    }
-                }
-                
-                
-                lastCur = lastCur.next;
-            }
-        
-            lastHead = head;
             head = null;
             cur = null;
+            while(lastCur != null){
+                // this will handle with one level
+                if(lastCur.left != null) {
+                    TreeLinkNode one = lastCur.left;
+                    if(head != null)
+                        cur.next = one;
+                    else
+                        head = one;
+                    cur = one;
+                }
+                if(lastCur.right != null) {
+                    TreeLinkNode one = lastCur.right;
+                    if(head != null)
+                        cur.next = one;
+                    else
+                        head = one;
+                    cur = one;
+                }
+                lastCur = lastCur.next;
+            }
+            lastHead = head;
         }
-        
         return;
     }
 }

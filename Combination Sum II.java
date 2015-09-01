@@ -1,6 +1,5 @@
 public class Solution {
-    // 输出所有的结果 往往用DFS
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         Arrays.sort(candidates);
         List<Integer> one = new ArrayList<Integer>();
         List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -21,7 +20,7 @@ public class Solution {
                 continue;
             if(candidates[i] <= target) {
                 one.add(candidates[i]);
-                helpAdding(res, one, target - candidates[i], candidates, i);
+                helpAdding(res, one, target - candidates[i], candidates, i + 1);
                 one.remove(one.size() - 1);
             }
         }

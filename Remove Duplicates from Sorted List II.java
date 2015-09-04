@@ -6,27 +6,31 @@
  *     ListNode(int x) { val = x; }
  * }
  */
+// create a phead;
+// find the next one to conctanate -- if duplicate skip, or if last one or unique, update 
+// then prev.next = null; whcih means that if last was added, that is fine, but if last one 
+// is not added then we will skip them and directly add null
+
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         ListNode phead = new ListNode(1);
         phead.next = head;
+        ListNode cur = head; // 
         ListNode prev = phead;
-        ListNode cur = phead.next;
-        while(cur != null)
-        {
-            if(cur.next != null && cur.next.val == cur.val)
-            {
-                int tempVal = cur.val;
-                while(cur != null && cur.val == tempVal)
+        while(cur != null) {
+            if(cur.next != null && cur.next.val == cur.val) {
+                // skip if we find duplicate
+                while(cur.next != null && cur.next.val == cur.val)
                     cur = cur.next;
-                prev.next = cur;
+                cur = cur.next;
             }
-            else
-            {
+            else {
+                prev.next = cur;
                 cur = cur.next;
                 prev = prev.next;
             }
         }
+        prev.next = null;
         return phead.next;
     }
 }

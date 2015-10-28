@@ -18,3 +18,16 @@ public class Solution {
         return s;
     }
 }
+                int tempSum = nums[i] + nums[s] + nums[t];
+                if(tempSum == target)
+                    return target; // no need to update
+                else if(tempSum < target) {
+                    if(target - tempSum < Math.abs(close - target))
+                        close = tempSum;
+                    do{s++;} while(s < t && nums[s] == nums[s - 1]);
+                }
+                else {
+                    if(tempSum - target < Math.abs(close - target))
+                        close = tempSum;
+                    do{t--;} while(s < t && nums[t] == nums[t + 1]);
+                }
